@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TECHSTORE | ონლაინ მაღაზია</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ნავიგაცია -->
+<nav class="navbar">
+    <div class="logo">ჩვენ<span>თვის</span></div>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="მოძებნე პროდუქტი...">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+    <div class="cart-btn" onclick="toggleCart()">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span id="cartCount">0</span>
+    </div>
+</nav>
+
+<!-- Hero სექცია -->
+<header class="hero">
+    <div class="hero-content">
+        <h1>ყველაფერი საუკეთესო — „ჩვენთვის“</h1>
+        <p>აღმოაჩინე ხარისხიანი პროდუქცია საუკეთესო ფასად და სწრაფი მიწოდებით</p>
+        <a href="#products" class="btn-primary">ყიდვა</a>
+    </div>
+</header>
+
+    <!-- ძირითადი კონტენტი -->
+    <main class="main-container" id="products">
+        <!-- ფილტრები -->
+        <div class="categories">
+            <button class="filter-btn active" onclick="filterProducts('all')">ყველა</button>
+            <button class="filter-btn" onclick="filterProducts('laptop')">ლეპტოპები</button>
+            <button class="filter-btn" onclick="filterProducts('phone')">ტელეფონები</button>
+            <button class="filter-btn" onclick="filterProducts('accessory')">აქსესუარები</button>
+        </div>
+
+        <!-- პროდუქტების ბადე -->
+        <div class="product-grid" id="productGrid"></div>
+    </main>
+
+    <!-- გვერდითი კალათა (Cart Sidebar) -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>შენი კალათა</h3>
+            <span class="close-btn" onclick="toggleCart()">&times;</span>
+        </div>
+        <div class="cart-body" id="cartItems">
+            <p class="empty-msg">კალათა ცარიელია</p>
+        </div>
+        <div class="cart-footer">
+            <div class="total-price">
+                <span>სულ:</span>
+                <span id="cartTotal">0 ₾</span>
+            </div>
+            <button class="checkout-btn" onclick="openCheckoutModal()">გადახდაზე გადასვლა</button>
+        </div>
+    </div>
+
+    <!-- გადახდის ფანჯარა (Checkout Modal) -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeCheckoutModal()">&times;</span>
+            <h2>შეკვეთის გაფორმება & გადახდა</h2>
+            <form id="paymentForm" onsubmit="handlePayment(event)">
+                <div class="input-group">
+                    <label>სრული სახელი</label>
+                    <input type="text" required placeholder="გიორგი გიორგაძე">
+                </div>
+                <div class="input-group">
+                    <label>მიწოდების მისამართი</label>
+                    <input type="text" required placeholder="თბილისი, რუსთაველის გამზ. 1">
+                </div>
+                
+                <h3>ბარათით გადახდა (Stripe/Bank Simulation)</h3>
+                <div class="input-group">
+                    <label>ბარათის ნომერი</label>
+                    <input type="text" required placeholder="4532 •••• •••• 8899" maxlength="19">
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label>ვადა</label>
+                        <input type="text" required placeholder="MM/YY" maxlength="5">
+                    </div>
+                    <div class="input-group">
+                        <label>CVC / CWW</label>
+                        <input type="password" required placeholder="123" maxlength="3">
+                    </div>
+                </div>
+
+                <button type="submit" class="pay-btn">გადახდა (<span id="payAmount">0</span> ₾)</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
